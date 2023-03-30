@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +10,25 @@ namespace HealthBar
     {
         static void Main(string[] args)
         {
-            float healt , maxHealt = 100;
-  
-            while(true)
-            {
-                Console.Clear();
-                Console.Write("Введите число здоровья");
-                healt = Convert.ToSingle(Console.ReadLine());
+            float health; 
+            float lenghtHealthBar;
+            float maxPercent = 100;
 
-                if (healt <= maxHealt)
-                {
-                    DrawHealtBar(healt, maxHealt, ConsoleColor.Red);
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Console.Write("Максимальное количество здоровья - " + maxHealt + "\nНажмите любую клавишу и ведите число здоровья еще раз ...");
-                    Console.ReadKey();
-                    Console.Clear();
-                }
+            Console.Write("Введите длину HealthBar - ");
+            lenghtHealthBar = Convert.ToSingle(Console.ReadLine());
+            Console.Write("Введите процент здоровья - ");
+            health = Convert.ToSingle(Console.ReadLine());
+
+            if (health <= maxPercent)
+            {
+                DrawHealtBar(health, lenghtHealthBar, ConsoleColor.Red);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.Write("Процент здоровья должен быть не больше" +maxPercent + "\nНажмите любую клавишу и ведите число здоровья еще раз ...");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 
@@ -37,8 +37,9 @@ namespace HealthBar
             ConsoleColor defaultColor = Console.BackgroundColor;
             string bar = "";
             float percentHealth ;
+            float maxPercent = 100;
             
-            percentHealth = value / maxValue * 100;
+            percentHealth = value / maxValue * maxPercent;
 
             for (int i = 0; i < value; i++)
             {
@@ -60,7 +61,6 @@ namespace HealthBar
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine(bar + "]");
-            Console.WriteLine("Заполненность здоровья составляет - "+ percentHealth+ " процентов. ");
         }
     }
 }
